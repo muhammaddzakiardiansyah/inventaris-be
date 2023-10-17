@@ -2,10 +2,6 @@ const result = (res, data) => {
     console.log(data)
     return res.status(data.status).send({response: {message: data.message || data.error_message, statusCode: data.status, url: data.url, error: data.error_code}, data: data.data});
 };
-// const result = (res, data) => {
-//     console.log(data)
-//     return res.status(data.status).send({response: {data}, data: data.data});
-// };
 
 const response = {
     ok: (res, data = [], message = 'The request has succeeded', url) => {

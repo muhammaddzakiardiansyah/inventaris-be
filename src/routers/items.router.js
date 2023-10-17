@@ -5,6 +5,7 @@ const items = express();
 
 items.get('/', itemsController.get);
 items.post('/', validateDataitems, itemsController.add);
+items.put('/:id', itemsController.edit);
 
 
 module.exports = items;

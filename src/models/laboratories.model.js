@@ -7,11 +7,10 @@ const laboratoriesModel = {
             db.query('select * from laboratories', (err, result) => {
                 if(err) {
                     return reject({
-                        message : 'FILED_GET_DATA',
-                        error : err
+                        message : `the request has failed ${err}`,
                     });
                 } else {
-                    return resolve(result.rows[0]);
+                    return resolve(result.rows);
                 }
             });
         });
@@ -55,7 +54,7 @@ const laboratoriesModel = {
                         message: `failed get data ${err}`,
                     });
                 } else {
-                    db.query(`update laboratories set laboratory_name='${laboratory_name}' where id='${id}' returning *`, (err, result) => {
+                    db.query(`update laboratories set laboratory_name='${laboratory_name}', created_at='now()', updated_at='now()' where id='${id}' returning *`, (err, result) => {
                         if(err) {
                             return reject({
                                 status: 500,
