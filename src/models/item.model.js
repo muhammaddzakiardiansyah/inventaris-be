@@ -16,6 +16,20 @@ const itemsModel = {
             });
         });
     },
+    detail : (id) => {
+        return new Promise((resolve, reject) => {
+            db.query(`select * from items where id='${id}'`, (err, result) => {
+                if(err) {
+                    return reject({
+                        status: 400,
+                        message: `the request failed ${err}`
+                    });
+                } else {
+                    return resolve(result.rows[0]);
+                }
+            });
+        });
+    },
     add : (request) => {
         return new Promise((resolve, reject) => {
             const { item_code, item_name, registration_number, brand, origin, condition, amount, stock, year_of_purchase, laboratory_id } = request;
@@ -55,6 +69,20 @@ const itemsModel = {
                 }
             });
         });
+    },
+    remove : (id) => {
+        return new Promise((resolve, reject) => {
+            db.query(`delete from items where id='${id}'`, (err, result) => {
+                if(err) {
+                    return reject({
+                        status: 400,
+                        message: `the request failed ${err}`
+                    });
+                } else {
+                    return resolve(result.rows)
+                }
+            })
+        })
     }
 }
 

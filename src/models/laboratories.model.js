@@ -29,6 +29,36 @@ const laboratoriesModel = {
             })
         })
     },
+    perLab : (id) => {
+        return new Promise((resolve, reject) => {
+            const query = 'laboratories.laboratory_name, items.id, items.item_code, items.item_name, items.registration_number, items.brand, items.origin, items.condition, items.amount, items.stock, items.year_of_purchase, items.laboratory_id';
+            db.query(`select ${query} from laboratories right join items on laboratories.id=items.laboratory_id where items.laboratory_id='${id}'`, (err, result) => {
+                if(err) {
+                    return reject({
+                        status: 400,
+                        message: `failed get data ${err}`,
+                    });
+                } else {
+                    return resolve(result.rows);
+                }
+            })
+        })
+    },
+    specPerLab : (id) => {
+        return new Promise((resolve, reject) => {
+            const query = 'laboratories.laboratory_name, specifications.id, specifications.name, specifications.spec, specifications.laboratory_id';
+            db.query(`select ${query} from laboratories right join specifications on laboratories.id=specifications.laboratory_id where specifications.laboratory_id='${id}'`, (err, result) => {
+                if(err) {
+                    return reject({
+                        status: 400,
+                        message: `failed get data ${err}`,
+                    });
+                } else {
+                    return resolve(result.rows);
+                }
+            })
+        })
+    },
     add : ({laboratory_name}) => {
         return new Promise((resolve, reject) => {
             db.query(`insert into laboratories (id, laboratory_name) values ($1,$2) returning *`, [uuidv4(), laboratory_name], (err, result) => {

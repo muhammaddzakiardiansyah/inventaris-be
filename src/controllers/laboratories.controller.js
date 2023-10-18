@@ -18,6 +18,22 @@ const laboratoriesController = {
             return response.badRequest(res, error.message);
         }
     },
+    perLab : async (req, res) => {
+        try {
+            const result = await laboratoriesModel.perLab(req.params.id);
+            return response.ok(res, result, 'The request has successed', `http://localhost:4000/api/v1/laboratories/per-lab/${req.params.id}`)
+        } catch (error) {
+            return response.badRequest(res, error.message);
+        }
+    },
+    specPerLab : async (req, res) => {
+        try {
+            const result = await laboratoriesModel.specPerLab(req.params.id);
+            return response.ok(res, result, 'The request has successed', `http://localhost:4000/api/v1/specifications/spec-per-lab/${req.params.id}`)
+        } catch (error) {
+            return response.badRequest(res, error.message);
+        }
+    },
     add : async (req, res) => {
         try {
             const result = await laboratoriesModel.add(req.body);
