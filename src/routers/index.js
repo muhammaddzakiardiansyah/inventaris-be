@@ -8,6 +8,6 @@ const router = express();
 router.use('/laboratories', laboratories);
 router.use('/items', items);
 router.use('/specifications', specifications);
-router.use('/items_borrowed', items_borrowed);
+router.use('/items-borrowed', items_borrowed);
 
 module.exports = router;
