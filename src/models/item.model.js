@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 const itemsModel = {
     get : (req, res) => {
         return new Promise((resolve, reject) => {
-            db.query('select * from items', (err, result) => {
+            db.query('select * from items order by created_at desc', (err, result) => {
                 if(err) {
                     return reject({
                         status: 400,
